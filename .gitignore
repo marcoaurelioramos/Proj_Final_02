@@ -1,0 +1,21 @@
+# Ambiente Virtual
+.venv/
+env/
+venv/
+ENV/
+
+# Caches do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Dados brutos / compactados temporários
+*.zip
+
+# Arquivos do sistema / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
