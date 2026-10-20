@@ -25,3 +25,4 @@ data/processed/*
 Thumbs.db
 .vscode/
 .idea/
+~$*.docx
