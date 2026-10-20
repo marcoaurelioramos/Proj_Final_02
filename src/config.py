@@ -19,12 +19,18 @@ def carregar_env():
     arquivo_env = PASTA_RAIZ / ".env"
     if not arquivo_env.exists():
         return
-    for linha in arquivo_env.read_text(encoding="utf-8").splitlines():
+    
+    try:
+        conteudo = arquivo_env.read_text(encoding="utf-8")
+    except Exception:
+        conteudo = arquivo_env.read_text(encoding="latin-1")
+
+    for linha in conteudo.splitlines():
         linha = linha.strip()
         if not linha or linha.startswith("#") or "=" not in linha:
             continue
         chave, valor = linha.split("=", 1)
-        os.environ.setdefault(chave.strip(), valor.strip())
+        os.environ[chave.strip()] = valor.strip()
 
 
 carregar_env()
@@ -33,6 +39,6 @@ PG_CONFIG = {
     "host": os.environ.get("PG_HOST", "localhost"),
     "port": int(os.environ.get("PG_PORT", "5432")),
     "user": os.environ.get("PG_USER", "postgres"),
-    "password": os.environ.get("PG_PASSWORD", ""),
+    "password": os.environ.get("PG_PASSWORD", "postgres"),
 }
 PG_DATABASE = os.environ.get("PG_DATABASE", "pncp_controladoria")
