@@ -2,15 +2,15 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "3af14d3661b280b61619",
   "position": {
-    "x": 1386.72,
-    "y": 449.28,
+    "x": 1328.4,
+    "y": 401.76,
     "z": 8000,
-    "height": 557.28,
-    "width": 503.28,
+    "height": 678.24,
+    "width": 561.6,
     "tabOrder": 8000
   },
   "visual": {
-    "visualType": "barChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -69,6 +69,34 @@
         ],
         "isDefaultSort": true
       }
+    },
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Valor Homologado por Unidade Federativa (UF)'"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "drillFilterOtherVisuals": true
   }
