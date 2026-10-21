@@ -1,0 +1,69 @@
+table dim_fornecedor
+	lineageTag: be8ae20c-de50-47e4-8108-11138967081b
+
+	column sk_fornecedor
+		dataType: int64
+		formatString: 0
+		lineageTag: eb0eb3e8-c9fc-405c-8e43-11f6a088bf30
+		summarizeBy: none
+		sourceColumn: sk_fornecedor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ni_fornecedor
+		dataType: string
+		lineageTag: 52465858-8da4-4989-8372-e1c0f1ec9719
+		summarizeBy: none
+		sourceColumn: ni_fornecedor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_fornecedor
+		dataType: string
+		lineageTag: fcd80dc7-d28f-4885-899e-d18ce8b233f9
+		summarizeBy: none
+		sourceColumn: nome_fornecedor
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_pessoa
+		dataType: string
+		lineageTag: 3bdba5a1-4839-4ff6-a918-ddae4ec1025d
+		summarizeBy: none
+		sourceColumn: tipo_pessoa
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column porte
+		dataType: string
+		lineageTag: 772c99c9-ab9e-49be-9e4e-c95341c94a6f
+		summarizeBy: none
+		sourceColumn: porte
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_fornecedor = m
+		mode: import
+		source =
+				let
+				  Origem = PostgreSQL.Database("localhost", "pncp_controladoria"),
+				  #"Navegação 1" = Origem{[Schema = "public", Item = "dim_fornecedor"]}[Data]
+				in
+				  #"Navegação 1"
+
+	changedProperty = IsHidden
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,83 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 37.07154162614566,
+            "y": 398.55773984616582
+          },
+          "nodeIndex": "dim_fornecedor",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 671.44878709794864,
+            "y": 0
+          },
+          "nodeIndex": "dim_localidade",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 670.33293790046844,
+            "y": 462.49985015334187
+          },
+          "nodeIndex": "dim_modalidade",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 46.240515832905373,
+            "y": 0
+          },
+          "nodeIndex": "dim_orgao",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 331.62587868942643,
+            "y": 199.48520942387475
+          },
+          "nodeIndex": "fato_item_contratado",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0,
+          "expandedHeight": 300
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 77.348742679354146,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

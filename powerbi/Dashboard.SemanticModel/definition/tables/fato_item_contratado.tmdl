@@ -1,0 +1,204 @@
+table fato_item_contratado
+	lineageTag: 7d60e220-c281-42ad-993f-037cbea0e10e
+
+	column id_fato
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d98c6f0-d6c1-4698-b08d-2839dd482fbb
+		summarizeBy: sum
+		sourceColumn: id_fato
+
+		annotation SummarizationSetBy = Automatic
+
+	column numero_controle_pncp
+		dataType: string
+		lineageTag: fbcf9caf-2069-48bd-8327-ce2d810d1c95
+		summarizeBy: none
+		sourceColumn: numero_controle_pncp
+
+		annotation SummarizationSetBy = Automatic
+
+	column numero_item
+		dataType: int64
+		formatString: 0
+		lineageTag: fa63b0dc-48cb-4209-aea1-4e771abe3e05
+		summarizeBy: sum
+		sourceColumn: numero_item
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_orgao
+		dataType: int64
+		formatString: 0
+		lineageTag: 55d20b8b-7381-48d5-82dc-78c771f615f4
+		summarizeBy: none
+		sourceColumn: sk_orgao
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_fornecedor
+		dataType: int64
+		formatString: 0
+		lineageTag: ec1bf78f-6e27-440e-bad2-27829cc287cc
+		summarizeBy: none
+		sourceColumn: sk_fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_modalidade
+		dataType: int64
+		formatString: 0
+		lineageTag: 183c52ed-466c-4b3f-9c81-c3951a7f05e9
+		summarizeBy: none
+		sourceColumn: sk_modalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_localidade
+		dataType: int64
+		formatString: 0
+		lineageTag: d612f24b-f1b8-41a8-b5f8-584620349f62
+		summarizeBy: none
+		sourceColumn: sk_localidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_publicacao
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8518fc3e-85f4-48b0-a29c-ace297cb6b54
+		summarizeBy: none
+		sourceColumn: data_publicacao
+
+		variation Variação
+			isDefault
+			relationship: 953a0022-9017-4618-ad35-83434ee47072
+			defaultHierarchy: LocalDateTable_e70d4e21-83bb-477b-95fb-38e93122161d.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column data_homologacao
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 680ac5d4-1da1-4da7-a46a-d10c2c849f82
+		summarizeBy: none
+		sourceColumn: data_homologacao
+
+		variation Variação
+			isDefault
+			relationship: 7e8b1a7b-d816-403c-b903-426ffb41e70f
+			defaultHierarchy: LocalDateTable_a2be5741-a94c-4b8f-9e51-4a728485488e.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column descricao_item
+		dataType: string
+		lineageTag: 63be0faa-a084-46ae-81f9-1f0f53534161
+		summarizeBy: none
+		sourceColumn: descricao_item
+
+		annotation SummarizationSetBy = Automatic
+
+	column perfil_gasto
+		dataType: string
+		lineageTag: 7eb51245-4560-4479-92e3-b183a9fe2c8d
+		summarizeBy: none
+		sourceColumn: perfil_gasto
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade
+		dataType: double
+		lineageTag: 00144283-2260-42cf-a5e7-1d5fe28ea0c7
+		summarizeBy: sum
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_unitario_estimado
+		dataType: double
+		lineageTag: 7887d718-504e-4cf7-ade2-db2bb5d5ac67
+		summarizeBy: sum
+		sourceColumn: valor_unitario_estimado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_total_estimado
+		dataType: double
+		lineageTag: db6f9b05-4890-40b5-ae77-9e24b5cca15e
+		summarizeBy: sum
+		sourceColumn: valor_total_estimado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_unitario_homologado
+		dataType: double
+		lineageTag: c34d5999-005b-4b3a-bf12-83fe6bbd78bc
+		summarizeBy: sum
+		sourceColumn: valor_unitario_homologado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column valor_total_homologado
+		dataType: double
+		lineageTag: 2bd30b5e-3fe4-4a76-81c4-dcd633ceeb33
+		summarizeBy: sum
+		sourceColumn: valor_total_homologado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column comparavel
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ccf2152-b215-447c-a688-412a94a7b594
+		summarizeBy: sum
+		sourceColumn: comparavel
+
+		annotation SummarizationSetBy = Automatic
+
+	column economia_valor
+		dataType: double
+		lineageTag: 47e88620-b3f2-47a0-a49a-a300828a31d9
+		summarizeBy: sum
+		sourceColumn: economia_valor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dias_ciclo
+		dataType: int64
+		formatString: 0
+		lineageTag: b93552fb-1135-4559-abbf-302131ce9993
+		summarizeBy: sum
+		sourceColumn: dias_ciclo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_item_contratado = m
+		mode: import
+		source =
+				let
+				  Origem = PostgreSQL.Database("localhost", "pncp_controladoria"),
+				  #"Navegação 1" = Origem{[Schema = "public", Item = "fato_item_contratado"]}[Data]
+				in
+				  #"Navegação 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

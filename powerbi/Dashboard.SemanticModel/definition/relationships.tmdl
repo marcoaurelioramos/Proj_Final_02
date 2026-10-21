@@ -1,0 +1,34 @@
+relationship 953a0022-9017-4618-ad35-83434ee47072
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fato_item_contratado.data_publicacao
+	toColumn: LocalDateTable_e70d4e21-83bb-477b-95fb-38e93122161d.Date
+
+relationship 7e8b1a7b-d816-403c-b903-426ffb41e70f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fato_item_contratado.data_homologacao
+	toColumn: LocalDateTable_a2be5741-a94c-4b8f-9e51-4a728485488e.Date
+
+relationship 74aa4f79-3d6c-4bbc-9cbe-8507df8dcb8d
+	fromColumn: fato_item_contratado.sk_fornecedor
+	toColumn: dim_fornecedor.sk_fornecedor
+
+	annotation PBI_IsFromSource = FS
+
+relationship eb80c4fa-1670-40ca-8ee3-a1481712f261
+	fromColumn: fato_item_contratado.sk_localidade
+	toColumn: dim_localidade.sk_localidade
+
+	annotation PBI_IsFromSource = FS
+
+relationship d46c589c-1189-4c65-be52-bd28e7a29489
+	fromColumn: fato_item_contratado.sk_modalidade
+	toColumn: dim_modalidade.sk_modalidade
+
+	annotation PBI_IsFromSource = FS
+
+relationship 25668cf7-0d60-4987-94a3-ba0f7ef40ae9
+	fromColumn: fato_item_contratado.sk_orgao
+	toColumn: dim_orgao.sk_orgao
+
+	annotation PBI_IsFromSource = FS
+

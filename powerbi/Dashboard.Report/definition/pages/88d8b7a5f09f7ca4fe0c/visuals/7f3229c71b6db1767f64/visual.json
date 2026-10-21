@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "7f3229c71b6db1767f64",
+  "position": {
+    "x": 719.28,
+    "y": 449.28,
+    "z": 7000,
+    "height": 557.28,
+    "width": 572.4,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_item_contratado"
+                    }
+                  },
+                  "Property": "perfil_gasto"
+                }
+              },
+              "queryRef": "fato_item_contratado.perfil_gasto",
+              "nativeQueryRef": "perfil_gasto",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_medidas"
+                    }
+                  },
+                  "Property": "TotalHomologado"
+                }
+              },
+              "queryRef": "_medidas.TotalHomologado",
+              "nativeQueryRef": "TotalHomologado"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_medidas"
+                    }
+                  },
+                  "Property": "PercentualDesagio"
+                }
+              },
+              "queryRef": "_medidas.PercentualDesagio",
+              "nativeQueryRef": "PercentualDesagio"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_medidas"
+                  }
+                },
+                "Property": "TotalHomologado"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

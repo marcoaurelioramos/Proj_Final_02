@@ -1,0 +1,150 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "0cf38e317d813c6881e0",
+  "position": {
+    "x": 995.27559055118115,
+    "y": 52.913385826771659,
+    "z": 1,
+    "height": 629.9212598425197,
+    "width": 841.5748031496064,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_modalidade"
+                    }
+                  },
+                  "Property": "nome_modalidade"
+                }
+              },
+              "queryRef": "dim_modalidade.nome_modalidade",
+              "nativeQueryRef": "nome_modalidade",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_medidas"
+                    }
+                  },
+                  "Property": "MediaDiasCiclo"
+                }
+              },
+              "queryRef": "_medidas.MediaDiasCiclo",
+              "nativeQueryRef": "MediaDiasCiclo"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_medidas"
+                  }
+                },
+                "Property": "MediaDiasCiclo"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tempo Média de Ciclo (Dias) por Modalidade'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d338d5ca6b5254deb56b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_modalidade"
+              }
+            },
+            "Property": "nome_modalidade"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2dd96fe249dc9e1418b9",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_medidas"
+              }
+            },
+            "Property": "MediaDiasCiclo"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+table _medidas
+	lineageTag: 0eb74e16-5d91-4369-aef2-4ca74422f8a9
+
+	measure TotalHomologado = SUM(fato_item_contratado[valor_total_homologado])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 6ece5388-e29a-41b5-8b29-6fffbad2e948
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure TotalEstimado = SUM(fato_item_contratado[valor_total_estimado])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: ccea2afb-ed98-477d-ba93-f041dca6e529
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure EconomiaReais = [TotalEstimado] - [TotalHomologado]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 773cee20-8671-4695-9f7f-3fcfcedf5451
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure TotalItens = COUNTROWS(fato_item_contratado)
+		formatString: 0
+		lineageTag: 2027aa6e-54c3-4e3b-ab86-e048508db746
+
+	measure MediaDiasCiclo = AVERAGE(fato_item_contratado[dias_ciclo])
+		formatString: 0.0
+		lineageTag: 3660039d-f44f-4dab-a4b6-86fb969cb6f4
+
+	measure PercentualDesagio = DIVIDE([EconomiaReais], [TotalEstimado], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d4a6f56f-089a-4020-a6c4-169b3140ca98
+
+	column 'Coluna 1'
+		dataType: string
+		lineageTag: 4f9359d5-99b2-4c4a-a618-30c3bc257fdd
+		summarizeBy: none
+		sourceColumn: Coluna 1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _medidas = m
+		mode: import
+		source =
+				let
+				  Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t])
+				in
+				  Origem
+
+	annotation PBI_ResultType = Table
+

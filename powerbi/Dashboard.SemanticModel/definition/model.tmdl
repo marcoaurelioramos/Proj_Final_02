@@ -1,0 +1,27 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_fornecedor","dim_localidade","dim_modalidade","dim_orgao","fato_item_contratado","_medidas"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_fornecedor
+ref table dim_localidade
+ref table dim_modalidade
+ref table dim_orgao
+ref table fato_item_contratado
+ref table DateTableTemplate_0af99106-ff2c-4c48-9f9c-396aa1c394da
+ref table LocalDateTable_e70d4e21-83bb-477b-95fb-38e93122161d
+ref table LocalDateTable_a2be5741-a94c-4b8f-9e51-4a728485488e
+ref table _medidas
+
+ref cultureInfo pt-BR
+

@@ -1,0 +1,49 @@
+table dim_orgao
+	lineageTag: d1fa2c23-1d04-42ce-be25-2f9e56b87386
+
+	column sk_orgao
+		dataType: int64
+		formatString: 0
+		lineageTag: cd50db34-e590-4d66-a7d9-b0dfb1f18f21
+		summarizeBy: none
+		sourceColumn: sk_orgao
+
+		annotation SummarizationSetBy = Automatic
+
+	column cnpj_orgao
+		dataType: string
+		lineageTag: 92a04eb5-0614-4732-b417-75dca1000cc9
+		summarizeBy: none
+		sourceColumn: cnpj_orgao
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_orgao
+		dataType: string
+		lineageTag: db686f15-4731-42ca-869b-0cae742bda7d
+		summarizeBy: none
+		sourceColumn: nome_orgao
+
+		annotation SummarizationSetBy = Automatic
+
+	column poder
+		dataType: string
+		lineageTag: d1db7af7-12b8-4297-896f-f8ccd1a89a45
+		summarizeBy: none
+		sourceColumn: poder
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_orgao = m
+		mode: import
+		source =
+				let
+				  Origem = PostgreSQL.Database("localhost", "pncp_controladoria"),
+				  #"Navegação 1" = Origem{[Schema = "public", Item = "dim_orgao"]}[Data]
+				in
+				  #"Navegação 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,42 @@
+table dim_modalidade
+	lineageTag: 83b45da6-50b8-4ee8-807b-437018aaab18
+
+	column sk_modalidade
+		dataType: int64
+		formatString: 0
+		lineageTag: 47f06e33-167f-4ec9-91d7-982e3ce81c8f
+		summarizeBy: none
+		sourceColumn: sk_modalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column modalidade_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 18f73191-5f7e-4546-9b98-078748f6bf63
+		summarizeBy: none
+		sourceColumn: modalidade_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_modalidade
+		dataType: string
+		lineageTag: 953c5519-e1a2-4107-8e32-23e3a7d8aab0
+		summarizeBy: none
+		sourceColumn: nome_modalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_modalidade = m
+		mode: import
+		source =
+				let
+				  Origem = PostgreSQL.Database("localhost", "pncp_controladoria"),
+				  #"Navegação 1" = Origem{[Schema = "public", Item = "dim_modalidade"]}[Data]
+				in
+				  #"Navegação 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
