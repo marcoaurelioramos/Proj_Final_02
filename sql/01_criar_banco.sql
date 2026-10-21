@@ -1,63 +1,66 @@
--- Esquema do banco PNCP Controladoria
--- Baseado nas colunas e nos valores dos CSVs da pasta processed.
--- ni_fornecedor aceita identificadores com até 30 caracteres.
--- comparavel é SMALLINT (0/1), conforme os valores presentes no CSV.
+-- =============================================================================
+-- PROJETO AVALIATIVO - MÓDULO 2 (PNCP 2025)
+-- Arquivo: sql/01_criar_banco.sql
+-- =============================================================================
 
-CREATE TABLE IF NOT EXISTS dim_orgao (
-    sk_orgao INTEGER PRIMARY KEY,
-    cnpj_orgao VARCHAR(14),
+DROP TABLE IF EXISTS fato_item_contratado CASCADE;
+DROP TABLE IF EXISTS dim_orgao CASCADE;
+DROP TABLE IF EXISTS dim_fornecedor CASCADE;
+DROP TABLE IF EXISTS dim_modalidade CASCADE;
+DROP TABLE IF EXISTS dim_localidade CASCADE;
+
+CREATE TABLE dim_orgao (
+    sk_orgao INT PRIMARY KEY,
+    cnpj_orgao VARCHAR(20) NOT NULL,
     nome_orgao VARCHAR(255) NOT NULL,
-    poder VARCHAR(30)
+    poder VARCHAR(50)
 );
 
-CREATE TABLE IF NOT EXISTS dim_fornecedor (
-    sk_fornecedor INTEGER PRIMARY KEY,
-    ni_fornecedor VARCHAR(30),
+CREATE TABLE dim_fornecedor (
+    sk_fornecedor INT PRIMARY KEY,
+    ni_fornecedor VARCHAR(20) NOT NULL,
     nome_fornecedor VARCHAR(255) NOT NULL,
     tipo_pessoa VARCHAR(20),
-    porte VARCHAR(30)
+    porte VARCHAR(50)
 );
 
-CREATE TABLE IF NOT EXISTS dim_modalidade (
-    sk_modalidade INTEGER PRIMARY KEY,
-    modalidade_id INTEGER,
+CREATE TABLE dim_modalidade (
+    sk_modalidade INT PRIMARY KEY,
+    modalidade_id INT NOT NULL,
     nome_modalidade VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS dim_localidade (
-    sk_localidade INTEGER PRIMARY KEY,
-    uf_sigla VARCHAR(2) NOT NULL,
-    uf_nome VARCHAR(50) NOT NULL,
-    regiao VARCHAR(30)
+CREATE TABLE dim_localidade (
+    sk_localidade INT PRIMARY KEY,
+    uf_sigla VARCHAR(10) NOT NULL,
+    uf_nome VARCHAR(100),
+    regiao VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS fato_item_contratado (
-    numero_controle_pncp VARCHAR(40) NOT NULL,
-    numero_item INTEGER NOT NULL,
-    sk_orgao INTEGER NOT NULL,
-    sk_fornecedor INTEGER NOT NULL,
-    sk_modalidade INTEGER NOT NULL,
-    sk_localidade INTEGER NOT NULL,
+CREATE TABLE fato_item_contratado (
+    id_fato BIGSERIAL PRIMARY KEY,
+    numero_controle_pncp VARCHAR(100) NOT NULL,
+    numero_item INT NOT NULL,
+    sk_orgao INT NOT NULL REFERENCES dim_orgao(sk_orgao),
+    sk_fornecedor INT NOT NULL REFERENCES dim_fornecedor(sk_fornecedor),
+    sk_modalidade INT NOT NULL REFERENCES dim_modalidade(sk_modalidade),
+    sk_localidade INT NOT NULL REFERENCES dim_localidade(sk_localidade),
     data_publicacao DATE,
     data_homologacao DATE,
     descricao_item TEXT,
-    perfil_gasto VARCHAR(30),
-    quantidade NUMERIC(20,4),
-    valor_unitario_estimado NUMERIC(20,4),
-    valor_total_estimado NUMERIC(20,4),
-    valor_unitario_homologado NUMERIC(20,4),
-    valor_total_homologado NUMERIC(20,4),
-    comparavel SMALLINT NOT NULL CHECK (comparavel IN (0, 1)),
-    economia_valor NUMERIC(20,4),
-    dias_ciclo NUMERIC(10,2),
-    CONSTRAINT pk_fato_item_contratado
-        PRIMARY KEY (numero_controle_pncp, numero_item),
-    CONSTRAINT fk_fato_orgao
-        FOREIGN KEY (sk_orgao) REFERENCES dim_orgao (sk_orgao),
-    CONSTRAINT fk_fato_fornecedor
-        FOREIGN KEY (sk_fornecedor) REFERENCES dim_fornecedor (sk_fornecedor),
-    CONSTRAINT fk_fato_modalidade
-        FOREIGN KEY (sk_modalidade) REFERENCES dim_modalidade (sk_modalidade),
-    CONSTRAINT fk_fato_localidade
-        FOREIGN KEY (sk_localidade) REFERENCES dim_localidade (sk_localidade)
+    perfil_gasto VARCHAR(100),
+    quantidade NUMERIC(15, 4),
+    valor_unitario_estimado NUMERIC(15, 2),
+    valor_total_estimado NUMERIC(15, 2),
+    valor_unitario_homologado NUMERIC(15, 2),
+    valor_total_homologado NUMERIC(15, 2),
+    comparavel SMALLINT,
+    economia_valor NUMERIC(15, 2),
+    dias_ciclo INT
 );
+
+CREATE INDEX idx_fato_orgao ON fato_item_contratado(sk_orgao);
+CREATE INDEX idx_fato_fornecedor ON fato_item_contratado(sk_fornecedor);
+CREATE INDEX idx_fato_modalidade ON fato_item_contratado(sk_modalidade);
+CREATE INDEX idx_fato_localidade ON fato_item_contratado(sk_localidade);
+CREATE INDEX idx_fato_comparavel ON fato_item_contratado(comparavel);

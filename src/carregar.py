@@ -29,13 +29,11 @@ def tuplas(tabela, colunas):
     return [tuple(linha) for linha in dados.itertuples(index=False, name=None)]
 
 
-def inserir(con, tabela, colunas, dados):
+def inserir(con, tabela, colunas_csv, colunas_banco, dados):
     """Monta o INSERT INTO ... VALUES (%s, %s, ...) e envia todas as linhas de uma vez."""
-    # Um %s para cada coluna. COMPLETE: monte uma lista com "%s" repetido len(colunas) vezes:  ["%s"] * len(colunas)
-    marcadores = ", ".join(["%s"] * len(colunas))
-    sql = f"INSERT INTO {tabela} ({', '.join(colunas)}) VALUES ({marcadores})"
-    # COMPLETE: envie em lote com banco.inserir_em_lote(conexao, sql, linhas)
-    banco.inserir_em_lote(con, sql, tuplas(dados, colunas))
+    marcadores = ", ".join(["%s"] * len(colunas_banco))
+    sql = f"INSERT INTO {tabela} ({', '.join(colunas_banco)}) VALUES ({marcadores})"
+    banco.inserir_em_lote(con, sql, tuplas(dados, colunas_csv))
     print(f"   {tabela}: {len(dados)} linhas")
 
 
@@ -43,34 +41,49 @@ def main():
     # 1) Banco (o recriar_banco apaga e cria de novo) e tabelas
     banco.recriar_banco()
     con = banco.conectar()
-    # COMPLETE: execute o arquivo SQL de criacao: banco.executar_script(conexao, caminho_do_arquivo)
     banco.executar_script(con, config.PASTA_SQL / "01_criar_banco.sql")
 
     # 2) Dimensoes PRIMEIRO: a fato tem chave estrangeira para elas, entao elas precisam existir antes.
     print("Carga:")
-    for nome, colunas in [("dim_orgao", ["sk_orgao", "cnpj_orgao", "nome_orgao", "poder"]),
-                          ("dim_fornecedor", ["sk_fornecedor", "ni_fornecedor", "nome_fornecedor", "tipo_pessoa", "porte"]),
-                          ("dim_modalidade", ["sk_modalidade", "modalidade_id", "nome_modalidade"]),
-                          ("dim_localidade", ["sk_localidade", "uf_sigla", "uf_nome", "regiao"])]:
+    dimensoes = [
+        ("dim_orgao", ["sk_orgao", "cnpj_orgao", "nome_orgao", "poder"], ["sk_orgao", "cnpj_orgao", "nome_orgao", "poder"]),
+        ("dim_fornecedor", ["sk_fornecedor", "ni_fornecedor", "nome_fornecedor", "tipo_pessoa", "porte"], ["sk_fornecedor", "ni_fornecedor", "nome_fornecedor", "tipo_pessoa", "porte"]),
+        ("dim_modalidade", ["sk_modalidade", "modalidade_id", "nome_modalidade"], ["sk_modalidade", "modalidade_id", "nome_modalidade"]),
+        ("dim_localidade", ["sk_localidade", "uf_sigla", "uf_nome", "regiao"], ["sk_localidade", "uf_sigla", "uf_nome", "regiao"])
+    ]
+
+    for nome, colunas_csv, colunas_banco in dimensoes:
         # dtype=str: o CNPJ nao pode perder o zero da esquerda ao ser lido
-        inserir(con, nome, colunas, ler(nome, dtype=str))
+        inserir(con, nome, colunas_csv, colunas_banco, ler(nome, dtype=str))
 
     # 3) Fato (depois das dimensoes)
     fato = ler("fato_item_contratado")
-    # dias_ciclo vem como 48.0 (decimal) porque tem vazios; o banco quer inteiro. COMPLETE: converta para o tipo "Int64"
-    fato["dias_ciclo"] = fato["dias_ciclo"].astype("Int64")
-    colunas = ["numero_controle_pncp", "numero_item", "sk_orgao", "sk_fornecedor", "sk_modalidade", "sk_localidade",
-               "data_publicacao", "data_homologacao", "descricao_item", "perfil_gasto", "quantidade",
-               "valor_unitario_estimado", "valor_total_estimado", "valor_unitario_homologado", "valor_total_homologado",
-               "comparavel", "economia_valor", "dias_ciclo"]
-    # COMPLETE: o nome da tabela da fato
-    inserir(con, "fato_item_contratado", colunas, fato)
+    if "dias_ciclo" in fato.columns:
+        fato["dias_ciclo"] = pd.to_numeric(fato["dias_ciclo"], errors="coerce").astype("Int64")
+
+    colunas_csv_fato = [
+        "numero_controle_pncp", "numero_item", "sk_orgao", "sk_fornecedor", "sk_modalidade", "sk_localidade",
+        "data_publicacao", "data_homologacao", "descricao_item", "perfil_gasto", "quantidade",
+        "valor_unitario_estimado", "valor_total_estimado", "valor_unitario_homologado", "valor_total_homologado",
+        "comparavel", "economia_valor", "dias_ciclo"
+    ]
+
+    colunas_banco_fato = [
+        "numero_controle_pncp", "numero_item", "sk_orgao", "sk_fornecedor", "sk_modalidade", "sk_localidade",
+        "data_publicacao", "data_homologacao", "descricao_item", "perfil_gasto", "quantidade",
+        "valor_unitario_estimado", "valor_total_estimado", "valor_unitario_homologado", "valor_total_homologado",
+        "comparavel", "economia_valor", "dias_ciclo"
+    ]
+
+    inserir(con, "fato_item_contratado", colunas_csv_fato, colunas_banco_fato, fato)
+
+    # Persiste explicitamente todas as alteracoes no banco de dados
+    con.commit()
 
     # 4) Conferencia: o que esta no banco tem que bater com a prova real (anexo 8 do enunciado)
     print("Conferencia:")
     for tabela, esperado in [("fato_item_contratado", 6126), ("dim_orgao", 363), ("dim_fornecedor", 2652),
                              ("dim_modalidade", 7), ("dim_localidade", 27)]:
-        # COMPLETE: conte as linhas da tabela com SELECT COUNT(*)
         n = banco.consultar(con, f"SELECT COUNT(*) FROM {tabela}")[0][0]
         print(f"   {tabela}: {n} (esperado {esperado}) -> {'OK' if n == esperado else 'DIVERGENTE'}")
     con.close()
