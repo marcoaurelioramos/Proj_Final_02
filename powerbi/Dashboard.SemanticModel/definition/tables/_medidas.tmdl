@@ -1,13 +1,21 @@
 table _medidas
 	lineageTag: 0eb74e16-5d91-4369-aef2-4ca74422f8a9
 
-	measure TotalHomologado = SUM(fato_item_contratado[valor_total_homologado])
+	measure TotalHomologado =
+			CALCULATE(
+			    SUM(fato_item_contratado[valor_total_homologado]),
+			    fato_item_contratado[comparavel] = 1
+			)
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: 6ece5388-e29a-41b5-8b29-6fffbad2e948
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
-	measure TotalEstimado = SUM(fato_item_contratado[valor_total_estimado])
+	measure TotalEstimado =
+			CALCULATE(
+			    SUM(fato_item_contratado[valor_total_estimado]),
+			    fato_item_contratado[comparavel] = 1
+			)
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		lineageTag: ccea2afb-ed98-477d-ba93-f041dca6e529
 
@@ -27,9 +35,59 @@ table _medidas
 		formatString: 0.0
 		lineageTag: 3660039d-f44f-4dab-a4b6-86fb969cb6f4
 
-	measure PercentualDesagio = DIVIDE([EconomiaReais], [TotalEstimado], 0)
+	measure PercentualDesagio =
+			VAR Economia = [TotalEconomia]
+			VAR EstimadoComp = [TotalEstimado]
+			RETURN
+			DIVIDE(Economia, EstimadoComp, 0)
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: d4a6f56f-089a-4020-a6c4-169b3140ca98
+
+	measure TotalEconomia = SUM(fato_item_contratado[economia_valor])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 9b9ab3fb-63c6-49ad-866b-c3df2628155b
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure QtdItensContratados = COUNT(fato_item_contratado[id_fato])
+		formatString: 0
+		lineageTag: b3f9b2f2-5ed1-4f2d-a990-a424e0f75034
+
+	measure MinDiasCiclo = MIN(fato_item_contratado[dias_ciclo])
+		formatString: 0
+		lineageTag: dcef8291-3237-4d72-8f92-c9361cc8f1fd
+
+	measure MaxDiasCiclo = MAX(fato_item_contratado[dias_ciclo])
+		formatString: 0
+		lineageTag: 743c6061-ec79-416a-8612-19e8b365595f
+
+	measure QtdOrgaos = DISTINCTCOUNT(dim_orgao[cnpj_orgao])
+		formatString: 0
+		lineageTag: b6832b76-f3fd-41f5-bfb0-984c6ae3d976
+
+	measure QtdFornecedores = DISTINCTCOUNT(dim_fornecedor[ni_fornecedor])
+		formatString: 0
+		lineageTag: 2445cd83-e6bd-4af3-8360-90633b277150
+
+	measure TotalHomologadoTop10 =
+			
+			CALCULATE(
+			    [TotalHomologado],
+			    TOPN(10, ALL(dim_fornecedor), [TotalHomologado], DESC)
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 92fdff56-7ddf-49d4-a4c6-f6711b37ed1d
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure PctConcentracaoTop10 =
+			
+			VAR TotalTop10 = [TotalHomologadoTop10]
+			VAR TotalGeral = CALCULATE([TotalHomologado], ALL(dim_fornecedor))
+			RETURN
+			DIVIDE(TotalTop10, TotalGeral, 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 91e02b0c-da2a-4573-a106-c6d2466a3b5c
 
 	column 'Coluna 1'
 		dataType: string
