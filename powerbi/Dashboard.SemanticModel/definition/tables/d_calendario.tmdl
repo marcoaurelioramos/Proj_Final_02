@@ -1,0 +1,74 @@
+table d_calendario
+	lineageTag: b315097b-4272-406b-aa51-24c35c6f0f54
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: a93250ba-a970-4753-aa79-2fb772e148b2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		formatString: 0
+		lineageTag: dbdda518-d310-463e-98cb-d578bbfd7eec
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Num'
+		formatString: 0
+		lineageTag: cb651d83-7b33-4189-be4a-5076aa87a73f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mês Num]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Mês'
+		lineageTag: 82a1bb3d-ba7b-4082-9d0f-6c84256d5090
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nome Mês]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Ano'
+		lineageTag: 2d78ff02-60dd-4140-9e76-eb1b3be1ffe0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mês Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: 002d26ca-6465-4622-9e84-b18ddd4d9027
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition d_calendario = calculated
+		mode: import
+		source =
+				
+				VAR MinData = MIN(fato_item_contratado[data_publicacao])
+				VAR MaxData = MAX(fato_item_contratado[data_publicacao])
+				RETURN
+				ADDCOLUMNS (
+				    CALENDAR ( MinData, MaxData ),
+				    "Ano", YEAR ( [Date] ),
+				    "Mês Num", MONTH ( [Date] ),
+				    "Nome Mês", FORMAT ( [Date], "mmmm", "pt-BR" ),
+				    "Mês Ano", FORMAT ( [Date], "mmm/yyyy", "pt-BR" ),
+				    "Trimestre", "T" & FORMAT ( [Date], "q" )
+				)
+
+	annotation PBI_Id = fe9013463f17404f81f0cf3fef27d32b
+

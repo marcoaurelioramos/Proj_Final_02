@@ -5,7 +5,7 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 0
+        "y": 245.6407091032323
       },
       "nodes": [
         {
@@ -63,11 +63,36 @@
           },
           "nodeIndex": "fato_item_contratado",
           "size": {
-            "height": 176,
+            "height": 300,
             "width": 234
           },
-          "zIndex": 0,
-          "expandedHeight": 300
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 918.377245471803,
+            "y": 255.24992507667093
+          },
+          "nodeIndex": "_medidas",
+          "nodeLineageTag": "0eb74e16-5d91-4369-aef2-4ca74422f8a9",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 330.12729289466756,
+            "y": 615.78920969046794
+          },
+          "nodeIndex": "d_calendario",
+          "nodeLineageTag": "b315097b-4272-406b-aa51-24c35c6f0f54",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",

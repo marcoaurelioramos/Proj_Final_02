@@ -70,11 +70,6 @@ table fato_item_contratado
 		summarizeBy: none
 		sourceColumn: data_publicacao
 
-		variation Variação
-			isDefault
-			relationship: 953a0022-9017-4618-ad35-83434ee47072
-			defaultHierarchy: LocalDateTable_e70d4e21-83bb-477b-95fb-38e93122161d.'Hierarquia de datas'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -85,11 +80,6 @@ table fato_item_contratado
 		lineageTag: 680ac5d4-1da1-4da7-a46a-d10c2c849f82
 		summarizeBy: none
 		sourceColumn: data_homologacao
-
-		variation Variação
-			isDefault
-			relationship: 7e8b1a7b-d816-403c-b903-426ffb41e70f
-			defaultHierarchy: LocalDateTable_a2be5741-a94c-4b8f-9e51-4a728485488e.'Hierarquia de datas'
 
 		annotation SummarizationSetBy = Automatic
 

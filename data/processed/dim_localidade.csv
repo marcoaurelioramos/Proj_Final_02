@@ -1,28 +1,28 @@
 sk_localidade,uf_sigla,uf_nome,regiao
-1,DF,DISTRITO FEDERAL,Centro-Oeste
-2,MG,MINAS GERAIS,Sudeste
-3,CE,CEARÁ,Nordeste
-4,AP,AMAPÁ,Norte
-5,BA,BAHIA,Nordeste
-6,SP,SÃO PAULO,Sudeste
-7,RJ,RIO DE JANEIRO,Sudeste
-8,RS,RIO GRANDE DO SUL,Sul
-9,MA,MARANHÃO,Nordeste
-10,MT,MATO GROSSO,Centro-Oeste
-11,AC,ACRE,Norte
-12,AM,AMAZONAS,Norte
-13,MS,MATO GROSSO DO SUL,Centro-Oeste
-14,SE,SERGIPE,Nordeste
-15,GO,GOIÁS,Centro-Oeste
-16,PA,PARÁ,Norte
-17,PR,PARANÁ,Sul
-18,TO,TOCANTINS,Norte
-19,PE,PERNAMBUCO,Nordeste
-20,SC,SANTA CATARINA,Sul
-21,ES,ESPÍRITO SANTO,Sudeste
-22,RN,RIO GRANDE DO NORTE,Nordeste
-23,PB,PARAÍBA,Nordeste
-24,RO,RONDÔNIA,Norte
-25,PI,PIAUÍ,Nordeste
-26,RR,RORAIMA,Norte
-27,AL,ALAGOAS,Nordeste
+1,DF,Distrito Federal,Centro-Oeste
+2,MG,Minas Gerais,Sudeste
+3,CE,Ceará,Nordeste
+4,AP,Amapá,Norte
+5,BA,Bahia,Nordeste
+6,SP,São Paulo,Sudeste
+7,RJ,Rio de Janeiro,Sudeste
+8,RS,Rio Grande do Sul,Sul
+9,PA,Pará,Norte
+10,MA,Maranhão,Nordeste
+11,MT,Mato Grosso,Centro-Oeste
+12,AC,Acre,Norte
+13,AM,Amazonas,Norte
+14,MS,Mato Grosso do Sul,Centro-Oeste
+15,SE,Sergipe,Nordeste
+16,GO,Goiás,Centro-Oeste
+17,PR,Paraná,Sul
+18,TO,Tocantins,Norte
+19,PE,Pernambuco,Nordeste
+20,SC,Santa Catarina,Sul
+21,ES,Espírito Santo,Sudeste
+22,RN,Rio Grande do Norte,Nordeste
+23,PB,Paraíba,Nordeste
+24,RO,Rondônia,Norte
+25,PI,Piauí,Nordeste
+26,RR,Roraima,Norte
+27,AL,Alagoas,Nordeste

@@ -1,13 +1,3 @@
-relationship 953a0022-9017-4618-ad35-83434ee47072
-	joinOnDateBehavior: datePartOnly
-	fromColumn: fato_item_contratado.data_publicacao
-	toColumn: LocalDateTable_e70d4e21-83bb-477b-95fb-38e93122161d.Date
-
-relationship 7e8b1a7b-d816-403c-b903-426ffb41e70f
-	joinOnDateBehavior: datePartOnly
-	fromColumn: fato_item_contratado.data_homologacao
-	toColumn: LocalDateTable_a2be5741-a94c-4b8f-9e51-4a728485488e.Date
-
 relationship 74aa4f79-3d6c-4bbc-9cbe-8507df8dcb8d
 	fromColumn: fato_item_contratado.sk_fornecedor
 	toColumn: dim_fornecedor.sk_fornecedor
@@ -31,4 +21,13 @@ relationship 25668cf7-0d60-4987-94a3-ba0f7ef40ae9
 	toColumn: dim_orgao.sk_orgao
 
 	annotation PBI_IsFromSource = FS
+
+relationship 31eb3edf-e071-c080-685f-f4bae3ed1ff8
+	fromColumn: fato_item_contratado.data_publicacao
+	toColumn: d_calendario.Date
+
+relationship 006ff52a-0daf-d448-d466-8cdea2198e72
+	isActive: false
+	fromColumn: fato_item_contratado.data_homologacao
+	toColumn: d_calendario.Date
 

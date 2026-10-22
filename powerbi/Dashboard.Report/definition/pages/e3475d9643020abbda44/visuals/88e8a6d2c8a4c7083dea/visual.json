@@ -118,7 +118,24 @@
   "filterConfig": {
     "filters": [
       {
+        "name": "a1d5523026f9efda8a5e",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fato_item_contratado"
+              }
+            },
+            "Property": "comparavel"
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
         "name": "097054db9eeeaec4840b",
+        "ordinal": 1,
         "field": {
           "Column": {
             "Expression": {
@@ -219,7 +236,58 @@
         }
       },
       {
+        "name": "e27ef65b4be69226bade",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fato_item_contratado"
+              }
+            },
+            "Property": "comparavel"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "f",
+              "Entity": "fato_item_contratado",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "f"
+                        }
+                      },
+                      "Property": "comparavel"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
         "name": "e912ba46514adf0522d1",
+        "ordinal": 3,
         "field": {
           "Measure": {
             "Expression": {
@@ -232,6 +300,7 @@
         },
         "type": "Advanced"
       }
-    ]
+    ],
+    "filterSortOrder": "Custom"
   }
 }

@@ -4,10 +4,10 @@
   "position": {
     "x": 995.27559055118115,
     "y": 52.913385826771659,
-    "z": 1,
+    "z": 1000,
     "height": 629.9212598425197,
     "width": 841.5748031496064,
-    "tabOrder": 1
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "columnChart",
@@ -118,7 +118,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "d338d5ca6b5254deb56b",
+        "name": "0d2a8a2398efc490b79c",
         "field": {
           "Column": {
             "Expression": {
@@ -132,7 +132,7 @@
         "type": "Categorical"
       },
       {
-        "name": "2dd96fe249dc9e1418b9",
+        "name": "8db17f617771047a614f",
         "field": {
           "Measure": {
             "Expression": {
@@ -144,6 +144,55 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "7fb76151b448e5c1d639",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fato_item_contratado"
+              }
+            },
+            "Property": "comparavel"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "f",
+              "Entity": "fato_item_contratado",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "f"
+                        }
+                      },
+                      "Property": "comparavel"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
       }
     ]
   }
