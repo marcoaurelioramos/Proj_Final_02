@@ -102,7 +102,7 @@ O projeto foi gerenciado utilizando a metodologia ágil **Scrum/Kanban** no Trel
 
 ## Estrutura do Repositório
 
-```
+
 Proj_Final_02/
 ─ data/
    ─ raw/                 # Arquivos CSV brutos recebidos
@@ -123,7 +123,7 @@ Proj_Final_02/
 ─ .gitignore
 ─ README.md                # Documentação principal do projeto
 ─ requirements.txt         # Dependências do projeto Python
-```
+
 
 ---
 
@@ -135,21 +135,21 @@ Proj_Final_02/
 * DBeaver ou pgAdmin (opcional)
 
 ### 2. Instalação das Dependências
-```bash
+
 pip install -r requirements.txt
-```
+
 
 ### 3. Execução do Pipeline ETL
 
 **1: Processamento e Tratamento dos Dados**
-```bash
+
 py -m src.montar_tabelas
-```
+
 
 **2: Carga no Banco de Dados PostgreSQL e Validação**
-```bash
+
 py -m src.carregar
-```
+
 
 ---
 
@@ -161,5 +161,13 @@ Após a execução da carga, o script `sql/02_perguntas.sql` pode ser executado 
 2. Economia gerada (R$) por região do país.
 3. Top fornecedores com maior volume financeiro homologado.
 4. Tempo médio de ciclo das contratações públicas por perfil de gasto.
+
+---
+
+## Vídeo do projeto
+
+O vídeo final de apresentação do projeto, está gravado no link público abaixo:
+
+(https://drive.google.com/file/d/1i1H7HbpZ5rXT_I67ii5IpBPsC6iIYPjo/view?usp=sharing).
 
 ---

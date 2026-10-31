@@ -13,7 +13,7 @@ COMO RODAR: py -m src.montar_tabelas
 import pandas as pd
 import numpy as np
 from src import config, limpeza
-
+py -m src.montar_tabelas
 
 def str_limpo(val):
     if pd.isna(val) or val is None:
